@@ -19,20 +19,16 @@ public class AppController {
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
 		model.addAttribute("movieName", session.getAttribute("movieName"));
+		model.addAttribute("director", session.getAttribute("director"));
 		return "movies";
 	}
 	
 	@RequestMapping(path = "/movies", method = RequestMethod.POST)
-	public String movie(Model model, HttpSession session, String movieName, String Director) {
+	public String movie(Model model, HttpSession session, String movieName, String director) {
 		System.out.println(movieName);
 		session.setAttribute("movieName", movieName);
-		return "redirect:/";
+		session.setAttribute("director", director);
+		return "movie.json";
 	}  
 
-	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public String login(HttpSession session, String userName, String other) {
-		System.out.println(other);
-		session.setAttribute("userName", userName);
-		return "redirect:/";
-	}	
 }

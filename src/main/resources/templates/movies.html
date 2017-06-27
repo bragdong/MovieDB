@@ -7,15 +7,17 @@
 {{#movieName}}Hello, {{.}}!{{/movieName}}
 
 {{^movieName}}
+{{/movieName}}
 <div>
+
 <form action = "/movies" method = "Post">
 	<input type="text" placeholder="Enter movie name" name="movieName"/>
 
-	<input type="text" placeholder="Enter director" name="Director"/>
+	<input type="text" placeholder="Enter director" name="director"/>
 <button type="submit">Submit</button>
 
 </form>
 </div>
-{{/movieName}}
+
 </body>
 </html>

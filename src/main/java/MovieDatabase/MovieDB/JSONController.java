@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class JSONController {
 	
-//	@RequestMapping(path = "/person.json", method = RequestMethod.GET)
-//	public Person jsonHome(String name, String city, Integer age) {
-//		
-//		if (age == null) {
-//			age = 3;
-//		}
-//		return new Person(name, city, age);
-//	}
+	@RequestMapping(path = "/movie.json", method = RequestMethod.POST)
+	public Movie jsonHome(String movieName, String director) {
+		
+		return new Movie(movieName, director);
+	}
+
 }
