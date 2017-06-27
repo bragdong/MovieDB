@@ -18,9 +18,16 @@ public class AppController {
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
-		model.addAttribute("name", session.getAttribute("userName"));
-		return "home";
+		model.addAttribute("movieName", session.getAttribute("movieName"));
+		return "movies";
 	}
+	
+	@RequestMapping(path = "/movies", method = RequestMethod.POST)
+	public String movie(Model model, HttpSession session, String movieName, String Director) {
+		System.out.println(movieName);
+		session.setAttribute("movieName", movieName);
+		return "redirect:/";
+	}  
 
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
 	public String login(HttpSession session, String userName, String other) {

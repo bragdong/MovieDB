@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+{{#movieName}}Hello, {{.}}!{{/movieName}}
+
+{{^movieName}}
+<div>
+<form action = "/movies" method = "Post">
+	<input type="text" placeholder="Enter movie name" name="movieName"/>
+
+	<input type="text" placeholder="Enter director" name="Director"/>
+<button type="submit">Submit</button>
+
+</form>
+</div>
+{{/movieName}}
+</body>
+</html>
