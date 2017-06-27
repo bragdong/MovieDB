@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class AppController {
@@ -35,12 +36,19 @@ public class AppController {
 
 	@RequestMapping(path = "/addmovie", method = RequestMethod.POST)
 	@ResponseBody
+	public String addmovie(@RequestBody Movie m) {
+		return m.getDirector();
+	}
+	
+	
+/*	@RequestMapping(path = "/addmovie", method = RequestMethod.POST)
+	@ResponseBody
 	public Movie addmovie(Model model, HttpSession session, String userName,
 			String director) {
 
 		Movie m = new Movie(userName, director);
 		return m;
-	}
+	}*/
 
 	@RequestMapping(path = "/getmovie", method = RequestMethod.GET) // Get or
 																	// Post?
