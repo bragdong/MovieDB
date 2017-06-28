@@ -1,16 +1,24 @@
 package MovieDatabase.MovieDB;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@Controller
+@RestController
 public class AppController {
+	
+	@Autowired
+	private MovieRepository movieRepository;
+	
 	// @RequestMapping(path = "/person", method = RequestMethod.GET)
 	// public String person(Model model, String name, String city, int age) {
 	// Person p = new Person(name, city, age);
@@ -26,17 +34,23 @@ public class AppController {
 	}
 
 	@RequestMapping(path = "/movies", method = RequestMethod.POST)
-	public String movie(Model model, HttpSession session, String movieName,
+	public List<Movie> movie(Model model, HttpSession session, String movieName,
 			String director) {
-		System.out.println(movieName);
+		Movie n = new Movie(movieName, director);
+		movieRepository.save(n);
+		//Movie m = movieRepository.findOne(2);
+		//System.out.println(m.getMovieName());
 		session.setAttribute("movieName", movieName);
 		session.setAttribute("director", director);
-		return "movie.json";
+		//return movieRepository.findAll();
+		return movieRepository.findBYmovieName("IndianaJones2", "stanley67");
 	}
-
 	@RequestMapping(path = "/addmovie", method = RequestMethod.POST)
-	@ResponseBody
 	public String addmovie(@RequestBody Movie m) {
+		// save the joke
+		Movie n = new Movie(m.getMovieName(), m.getDirector());
+		movieRepository.save(n);
+
 		return m.getDirector();
 	}
 	
