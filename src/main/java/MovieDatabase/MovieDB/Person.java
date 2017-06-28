@@ -1,39 +1,69 @@
 package MovieDatabase.MovieDB;
 
-public class Person {
-	
-    String name;
-    String city;
-    int age;
+import java.io.Serializable;
 
-    public Person(String name, String city, int age) {
-        this.name = name;
-        this.city = city;
-        this.age = age;
-    }
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	public String getName() {
-		return name;
+@Entity
+@Table(name = "person")
+
+public class Person implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String firstname;
+	private String lastname;
+	private String role_flag;
+
+	@Id
+	@GeneratedValue
+	private int id;
+
+	public Person() {
+	};
+
+	public Person(String firstname, String lastname, String username) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.role_flag = username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public String getCity() {
-		return city;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public String getLastname() {
+		return lastname;
 	}
 
-	public int getAge() {
-		return age;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
-	}  
+	public String getRoleFlag() {
+		return role_flag;
+	}
+
+	public void setRoleFlag(String role_flag) {
+		this.role_flag = role_flag;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 }

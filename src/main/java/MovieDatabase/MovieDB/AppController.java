@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +17,9 @@ public class AppController {
 	
 	@Autowired
 	private MovieRepository movieRepository;
+	
+	@Autowired
+	private personRepository personRepository;
 	
 	// @RequestMapping(path = "/person", method = RequestMethod.GET)
 	// public String person(Model model, String name, String city, int age) {
@@ -53,6 +55,19 @@ public class AppController {
 
 		return m.getDirector();
 	}
+	
+	@RequestMapping(path = "/person", method = RequestMethod.POST)
+	public List<Person> person(Model model, HttpSession session, String firstname,
+			String lastname, String role_flag) {
+		Person p = new Person(firstname, lastname, role_flag);
+		personRepository.save(p);
+		//Movie m = movieRepository.findOne(2);
+		//System.out.println(m.getMovieName());
+		//return movieRepository.findAll();
+		return personRepository.findAll();
+	}
+	
+	
 	
 	
 /*	@RequestMapping(path = "/addmovie", method = RequestMethod.POST)
