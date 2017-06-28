@@ -18,6 +18,9 @@ public class AppController {
 	
 	@Autowired
 	private MovieRepository movieRepository;
+
+	@Autowired
+	private UserRepository userRepository;
 	
 	// @RequestMapping(path = "/person", method = RequestMethod.GET)
 	// public String person(Model model, String name, String city, int age) {
@@ -45,6 +48,19 @@ public class AppController {
 		//return movieRepository.findAll();
 		return movieRepository.findBYmovieName("IndianaJones2", "stanley67");
 	}
+	
+	@RequestMapping(path = "/users", method = RequestMethod.POST)
+	public List<User> user(Model model, HttpSession session, String userName,String firstName,String lastName) {
+		User user = new User(userName,firstName,lastName);
+		userRepository.save(user);
+		session.setAttribute("userName", userName);
+		session.setAttribute("firstName", userName);
+		session.setAttribute("lastName", userName);
+
+		//return movieRepository.findAll();
+		return userRepository.findAll();
+	}
+	
 	@RequestMapping(path = "/addmovie", method = RequestMethod.POST)
 	public String addmovie(@RequestBody Movie m) {
 		// save the joke
