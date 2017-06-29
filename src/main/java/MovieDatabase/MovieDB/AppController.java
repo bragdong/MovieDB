@@ -50,6 +50,12 @@ public class AppController {
 		//return movieRepository.findAll();
 		return movieRepository.findBYmovieName("IndianaJones2", "stanley67");
 	}
+
+	@RequestMapping(path = "/deletemovie", method = RequestMethod.DELETE)
+	public List<Movie> movie(Model model, HttpSession session, int id) {
+		movieRepository.delete(id);
+		return movieRepository.findAll();
+	}
 	
 	@RequestMapping(path = "/users", method = RequestMethod.POST)
 	public List<User> user(Model model, HttpSession session, String userName,String firstName,String lastName) {
@@ -60,6 +66,18 @@ public class AppController {
 		session.setAttribute("lastName", userName);
 
 		//return movieRepository.findAll();
+		return userRepository.findAll();
+	}
+
+	@RequestMapping(path = "/showusers", method = RequestMethod.GET)
+	public List<User> user(Model model, HttpSession session){
+
+		return userRepository.findAll();
+	}
+	
+	@RequestMapping(path = "/deleteuser", method = RequestMethod.DELETE)
+	public List<User> user(Model model, HttpSession session, int id) {
+		userRepository.delete(id);
 		return userRepository.findAll();
 	}
 	
