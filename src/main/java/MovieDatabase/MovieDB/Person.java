@@ -66,4 +66,17 @@ public class Person implements Serializable {
 		this.id = id;
 	}
 
+	public void merge(Person other) {
+		if (other.firstname != null) {
+			this.firstname = other.firstname;
+		}
+		if (other.lastname != null) {
+			this.lastname = other.lastname;
+		}
+		if (other.role_flag != null) {
+			this.role_flag = other.role_flag;
+		}
+		
+		
+	}
 }
