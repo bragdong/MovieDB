@@ -25,13 +25,6 @@ public class AppController {
 	@Autowired
 	private personRepository personRepository;
 
-	// @RequestMapping(path = "/person", method = RequestMethod.GET)
-	// public String person(Model model, String name, String city, int age) {
-	// Person p = new Person(name, city, age);
-	// model.addAttribute("person", p);
-	// return "person";
-	// }
-
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
 		model.addAttribute("movieName", session.getAttribute("movieName"));
@@ -39,23 +32,37 @@ public class AppController {
 		return "movies";
 	}
 
-	@RequestMapping(path = "/movies", method = RequestMethod.POST)
-	public List<Movie> movie(Model model, HttpSession session, String movieName,
+	@RequestMapping(path = "/api/movies/{id}", method = RequestMethod.GET)
+	public Movie getmovie(Model model, HttpSession session,
+			@PathVariable(name = "id", required = true) int id) {
+		return movieRepository.findById(id);
+	}
+
+	@RequestMapping(path = "/api/movies", method = RequestMethod.POST)
+	public Movie postmovie(Model model, HttpSession session, String movieName,
 			String director) {
 		Movie n = new Movie(movieName, director);
 		movieRepository.save(n);
-		// Movie m = movieRepository.findOne(2);
-		// System.out.println(m.getMovieName());
-		session.setAttribute("movieName", movieName);
-		session.setAttribute("director", director);
-		// return movieRepository.findAll();
-		return movieRepository.findBYmovieName("IndianaJones2", "stanley67");
+		return n;
 	}
 
-	@RequestMapping(path = "/deletemovie", method = RequestMethod.DELETE)
-	public List<Movie> movie(Model model, HttpSession session, int id) {
+	@RequestMapping(path = "/api/movies", method = RequestMethod.PUT)
+	public void putmovie(Model model, HttpSession session, String movieName,
+			String director, int id) {
+		Movie n = movieRepository.findById(id);
+		if (movieName != null) {
+			n.setMovieName(movieName);
+		}
+		if (director != null) {
+			n.setDirector(director);
+		}
+		n.setId(id);
+		movieRepository.save(n);
+	}
+
+	@RequestMapping(path = "/api/movies", method = RequestMethod.DELETE)
+	public void deletemovie(Model model, HttpSession session, int id) {
 		movieRepository.delete(id);
-		return movieRepository.findAll();
 	}
 
 	@RequestMapping(path = "/api/user", method = RequestMethod.POST)
@@ -105,10 +112,12 @@ public class AppController {
 	}
 
 	@RequestMapping(path = "/api/person", method = RequestMethod.POST)
+	
 	public List<Person> person(Model model, HttpSession session,
 			String firstname, String lastname, String role_flag) {
 		Person p = new Person(firstname, lastname, role_flag);
 		personRepository.save(p);
+
 		return personRepository.findAll();
 	}
 
