@@ -78,6 +78,18 @@ public class AppController {
 		return userRepository.findAll();
 	}
 
+	@RequestMapping(path = "/showusers", method = RequestMethod.GET)
+	public List<User> user(Model model, HttpSession session){
+
+		return userRepository.findAll();
+	}
+	
+	@RequestMapping(path = "/deleteuser", method = RequestMethod.DELETE)
+	public List<User> user(Model model, HttpSession session, int id) {
+		userRepository.delete(id);
+		return userRepository.findAll();
+	}
+	
 	@RequestMapping(path = "/addmovie", method = RequestMethod.POST)
 	public String addmovie(@RequestBody Movie m) {
 		// save the joke
