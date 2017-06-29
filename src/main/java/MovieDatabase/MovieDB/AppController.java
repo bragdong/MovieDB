@@ -69,6 +69,7 @@ public class AppController {
 	public List<User> user(Model model, HttpSession session, String userName,
 			String firstName, String lastName) {
 		User user = new User(userName, firstName, lastName);
+		// Rating rating = new Rating()   //just to create a user do I need to create a rating
 		userRepository.save(user);
 		session.setAttribute("userName", userName);
 		session.setAttribute("firstName", userName);
@@ -84,6 +85,14 @@ public class AppController {
 		return userRepository.findAll();
 	}
 
+	@RequestMapping(path = "/api/user", method = RequestMethod.PUT)
+	public User updateuser(Model model, HttpSession session, @RequestBody User user) {
+		User existing = userRepository.findOne(user.getUserId());
+		existing.merge(user);
+		userRepository.save(existing);
+		return existing;
+	}	
+	
 	@RequestMapping(path = "/api/user", method = RequestMethod.DELETE)
 	public List<User> user(Model model, HttpSession session, int id) {
 		userRepository.delete(id);
