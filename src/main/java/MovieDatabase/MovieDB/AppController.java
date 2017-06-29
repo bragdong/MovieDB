@@ -1,5 +1,6 @@
 package MovieDatabase.MovieDB;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web. bind.annotation.RequestBody;
 
 @RestController
 public class AppController {
@@ -40,23 +41,31 @@ public class AppController {
 
 	@RequestMapping(path = "/api/movies", method = RequestMethod.POST)
 	public Movie postmovie(Model model, HttpSession session, String movieName,
-			String director) {
+			String director, ArrayList<Person> personlist) {
 		Movie n = new Movie(movieName, director);
+		if (personlist != null) {
+			for (Person i : personlist) {
+				n.addPerson(i);
+			}
+		}
 		movieRepository.save(n);
 		return n;
 	}
 
 	@RequestMapping(path = "/api/movies", method = RequestMethod.PUT)
 	public void putmovie(Model model, HttpSession session, String movieName,
-			String director, int id) {
-		Movie n = movieRepository.findById(id);
+			String director, int movie_id, String person_id) {
+		Movie n = movieRepository.findById(movie_id);
 		if (movieName != null) {
 			n.setMovieName(movieName);
 		}
 		if (director != null) {
 			n.setDirector(director);
 		}
-		n.setId(id);
+		if (person_id!=null){
+			Person p = personRepository.findOne(Integer.parseInt(person_id));
+			n.addPerson(p);
+		}
 		movieRepository.save(n);
 	}
 
@@ -121,7 +130,7 @@ public class AppController {
 	}
 
 	@RequestMapping(path = "/api/person", method = RequestMethod.POST)
-	
+
 	public List<Person> person(Model model, HttpSession session,
 			String firstname, String lastname, String role_flag) {
 		Person p = new Person(firstname, lastname, role_flag);
@@ -131,7 +140,8 @@ public class AppController {
 	}
 
 	@RequestMapping(path = "/api/person", method = RequestMethod.PUT)
-	public Person updateperson(Model model, HttpSession session, @RequestBody Person person) {
+	public Person updateperson(Model model, HttpSession session,
+			@RequestBody Person person) {
 		Person existing = personRepository.findOne(person.getId());
 		existing.merge(person);
 		personRepository.save(existing);
