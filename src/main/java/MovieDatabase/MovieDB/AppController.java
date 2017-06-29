@@ -72,8 +72,8 @@ public class AppController {
 		// Rating rating = new Rating()   //just to create a user do I need to create a rating
 		userRepository.save(user);
 		session.setAttribute("userName", userName);
-		session.setAttribute("firstName", userName);
-		session.setAttribute("lastName", userName);
+		session.setAttribute("firstName", firstName);
+		session.setAttribute("lastName", lastName);
 
 		// return movieRepository.findAll();
 		return userRepository.findAll();

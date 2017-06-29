@@ -38,7 +38,6 @@ public class User implements Serializable {
 	public User(String userName,
 			String firstName, String lastName) {
 		super();
-//		this.userId = userId;  //would this typically be set by JPA and not be here?? 
 		this.userName = userName;
 		this.password = "";
 		this.firstName = firstName;
@@ -99,6 +98,9 @@ public class User implements Serializable {
 
 	public void merge(User other) {
 		if (other.userName != null) {
+			this.userName = other.userName;
+		}
+		if (other.firstName != null) {
 			this.firstName = other.firstName;
 		}
 		if (other.lastName != null) {
