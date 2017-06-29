@@ -1,10 +1,13 @@
 package MovieDatabase.MovieDB;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,9 +19,27 @@ public class Person implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public String getRole_flag() {
+		return role_flag;
+	}
+
+	public void setRole_flag(String role_flag) {
+		this.role_flag = role_flag;
+	}
+
+	public List<Movie> getMovielist() {
+		return movielist;
+	}
+
+	public void setMovielist(List<Movie> movielist) {
+		this.movielist = movielist;
+	}
+
 	private String firstname;
 	private String lastname;
 	private String role_flag;
+	 @ManyToMany(mappedBy="personlist")
+	private List<Movie> movielist;
 
 	@Id
 	@GeneratedValue

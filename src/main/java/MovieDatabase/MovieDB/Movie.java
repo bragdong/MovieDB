@@ -1,10 +1,14 @@
 package MovieDatabase.MovieDB;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +27,16 @@ public class Movie implements Serializable {
 
 	private String movieName;
 	private String director;
+	 @ManyToMany(targetEntity = Person.class)
+	private List<Person> personlist;
+
+	public List<Person> getPersonlist() {
+		return personlist;
+	}
+
+	public void setPersonlist(List<Person> personlist) {
+		this.personlist = personlist;
+	}
 
 	public int getId() {
 		return id;
@@ -55,5 +69,10 @@ public class Movie implements Serializable {
 
 	public void setDirector(String director) {
 		this.director = director;
+	}
+	
+	public void addPerson(Person p) {
+		if (!personlist.contains(p))
+		{this.personlist.add(p);}
 	}
 }
