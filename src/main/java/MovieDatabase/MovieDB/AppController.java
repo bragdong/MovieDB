@@ -154,6 +154,39 @@ public class AppController {
 		return personRepository.findAll();
 	}
 
+// Adding CRUD operations for Ratings but commented out for now until we discuss
+//	@RequestMapping(path = "/api/rating/{id}", method = RequestMethod.GET)
+//	public Rating getRating(Model model, HttpSession session,
+//			@PathVariable(name = "id", required = true) int id) {
+//		return ratingRepository.findOne(id);
+//	}
+//
+//	@RequestMapping(path = "/api/rating", method = RequestMethod.POST)
+//
+//	public List<Rating> person(Model model, HttpSession session,
+//			Movie movie, User user, int rating) {
+//		Rating r = new Rating(movie, user, rating);
+//		ratingRepository.save(r);
+//
+//		return ratingRepository.findAll();
+//	}
+//
+//	@RequestMapping(path = "/api/rating", method = RequestMethod.PUT)
+//	public Person updateperson(Model model, HttpSession session,
+//			@RequestBody Rating rating) {
+//		Rating existing = ratingRepository.findOne(rating.getId());
+//		existing.merge(rating);
+//		ratingRepository.save(existing);
+//		return existing;
+//	}
+//
+//	@RequestMapping(path = "/api/rating", method = RequestMethod.DELETE)
+//	public List<rating> person(Model model, HttpSession session, int id) {
+//		ratingRepository.delete(id);
+//		return ratingRepository.findAll();
+//	}
+	
+	
 	/*
 	 * @RequestMapping(path = "/addmovie", method = RequestMethod.POST)
 	 * 

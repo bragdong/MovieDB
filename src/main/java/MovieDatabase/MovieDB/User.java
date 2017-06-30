@@ -31,12 +31,11 @@ public class User implements Serializable {
 	private String lastName;
 	
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)  // User has one to many ratings
 	@JoinColumn(name = "rating_id")
-	private List<Rating> ratings;    //can I add a user without passing one of these in? constructor needs updating?
+	private List<Rating> ratings;    // why do we need to have this on user if there can be rows on rating table related to a user?
 	
-	public User(String userName,
-			String firstName, String lastName) {
+	public User(String userName, String firstName, String lastName) {
 		super();
 		this.userName = userName;
 		this.password = "";

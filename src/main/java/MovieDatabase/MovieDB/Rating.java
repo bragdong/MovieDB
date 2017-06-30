@@ -22,18 +22,16 @@ public class Rating implements Serializable {
 	@GeneratedValue
 	private int id;  
 	
-	@ManyToOne
+	@ManyToOne  // There can be many ratings for a single movie
 	private Movie movie;
 	
-	@ManyToOne
+	@ManyToOne  // There can be many ratings for a single user
 	private User user;
-	
 	
 	private	int rating;
 	
 	public Rating(Movie movie, User user, int rating) {
 		super();
-//		this.id = id;  //this is not needed in constructor correct?
 		this.movie =  movie;
 		this.rating = rating;
 	}
@@ -46,8 +44,8 @@ public class Rating implements Serializable {
 		return id;
 	}
 
-	public void setRatingId(int ratingId) {
-		this.id = ratingId;
+	public void setRatingId(int id) {
+		this.id = id;
 	}
 
 	public Movie getMovie() {
@@ -66,8 +64,9 @@ public class Rating implements Serializable {
 		this.rating = rating;
 	}
 
-	public static long getSerialversionuid() {
+	public static long getSerialversionuid() {   // Is this needed ??
 		return serialVersionUID;
 	}	
-		
+
+	// Do we need methods here to add a Movie and User to Rating object?
 }
