@@ -38,12 +38,19 @@ public class Person implements Serializable {
 	private String firstname;
 	private String lastname;
 	private String role_flag;
-	 @ManyToMany(mappedBy="personlist")
+	 @ManyToMany
 	private List<Movie> movielist;
 
 	@Id
 	@GeneratedValue
 	private int id;
+
+	@Override
+	public String toString() {
+		return "Person [firstname=" + firstname + ", lastname=" + lastname
+				+ ", role_flag=" + role_flag + ", movielist=" + movielist
+				+ ", id=" + id + "]";
+	}
 
 	public Person() {
 	};

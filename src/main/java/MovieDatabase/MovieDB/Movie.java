@@ -21,13 +21,20 @@ public class Movie implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Override
+	public String toString() {
+		return "Movie [id=" + id + ", movieName=" + movieName + ", director="
+				+ director + ", personlist=" + personlist + "]";
+	}
+
 	@Id
 	@GeneratedValue
 	private int id;
 
 	private String movieName;
 	private String director;
-	 @ManyToMany(targetEntity = Person.class)
+	 @ManyToMany(mappedBy = "movielist")
+	 
 	private List<Person> personlist;
 
 	public List<Person> getPersonlist() {

@@ -56,6 +56,7 @@ public class AppController {
 	public void putmovie(Model model, HttpSession session, String movieName,
 			String director, int movie_id, String person_id) {
 		Movie n = movieRepository.findById(movie_id);
+		System.out.println(n.toString());
 		if (movieName != null) {
 			n.setMovieName(movieName);
 		}
@@ -64,7 +65,8 @@ public class AppController {
 		}
 		if (person_id!=null){
 			Person p = personRepository.findOne(Integer.parseInt(person_id));
-			n.addPerson(p);
+			System.out.println(p.toString());
+			n.getPersonlist().add(p);
 		}
 		movieRepository.save(n);
 	}
