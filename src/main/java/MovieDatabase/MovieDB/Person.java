@@ -19,26 +19,11 @@ public class Person implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public String getRole_flag() {
-		return role_flag;
-	}
-
-	public void setRole_flag(String role_flag) {
-		this.role_flag = role_flag;
-	}
-
-	public List<Movie> getMovielist() {
-		return movielist;
-	}
-
-	public void setMovielist(List<Movie> movielist) {
-		this.movielist = movielist;
-	}
 
 	private String firstname;
 	private String lastname;
 	private String role_flag;
-	 @ManyToMany
+	@ManyToMany
 	private List<Movie> movielist;
 
 	@Id
@@ -94,6 +79,14 @@ public class Person implements Serializable {
 		this.id = id;
 	}
 
+	public List<Movie> getMovielist() {
+		return movielist;
+	}
+
+	public void setMovielist(List<Movie> movielist) {
+		this.movielist = movielist;
+	}
+
 	public void merge(Person other) {
 		if (other.firstname != null) {
 			this.firstname = other.firstname;
@@ -104,7 +97,6 @@ public class Person implements Serializable {
 		if (other.role_flag != null) {
 			this.role_flag = other.role_flag;
 		}
-		
-		
+
 	}
 }
