@@ -2,7 +2,9 @@ package MovieDatabase.MovieDB;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,31 +21,18 @@ public class Person implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public String getRole_flag() {
-		return role_flag;
-	}
 
-	public void setRole_flag(String role_flag) {
-		this.role_flag = role_flag;
-	}
 
-	public List<Movie> getMovielist() {
-		return movielist;
-	}
-
-	public void setMovielist(List<Movie> movielist) {
-		this.movielist = movielist;
-	}
 
 	private String firstname;
 	private String lastname;
 	private String role_flag;
-	 @ManyToMany
-	private List<Movie> movielist;
+	 @ManyToMany(mappedBy = "personlist")
+	private Set<Movie> movielist;
 
 	@Id
 	@GeneratedValue
-	private int id;
+	int id;
 
 	@Override
 	public String toString() {
@@ -52,14 +41,14 @@ public class Person implements Serializable {
 				+ ", id=" + id + "]";
 	}
 
-	public Person() {
+	public Person() {this.movielist = new HashSet<Movie>();
 	};
 
-	public Person(String firstname, String lastname, String username) {
+	public Person(String firstname, String lastname, String role_flag) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.role_flag = username;
+		this.role_flag = role_flag;
 	}
 
 	public String getFirstname() {
@@ -78,11 +67,11 @@ public class Person implements Serializable {
 		this.lastname = lastname;
 	}
 
-	public String getRoleFlag() {
+	public String getRole_flag() {
 		return role_flag;
 	}
 
-	public void setRoleFlag(String role_flag) {
+	public void setRole_flag(String role_flag) {
 		this.role_flag = role_flag;
 	}
 
@@ -92,6 +81,14 @@ public class Person implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public Set<Movie> getMovielist() {
+		return movielist;
+	}
+
+	public void setMovielist(Set<Movie> movielist) {
+		this.movielist = movielist;
 	}
 
 	public void merge(Person other) {

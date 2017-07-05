@@ -2,8 +2,11 @@ package MovieDatabase.MovieDB;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -29,19 +32,18 @@ public class Movie implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private int id;
+	int id;
 
 	private String movieName;
 	private String director;
-	 @ManyToMany(mappedBy = "movielist")
-	 
-	private List<Person> personlist;
+	 @ManyToMany(cascade=CascadeType.ALL)
+	private Set<Person> personlist;
 
-	public List<Person> getPersonlist() {
+	public Set<Person> getPersonlist() {
 		return personlist;
 	}
 
-	public void setPersonlist(List<Person> personlist) {
+	public void setPersonlist(Set<Person> personlist) {
 		this.personlist = personlist;
 	}
 
@@ -59,7 +61,7 @@ public class Movie implements Serializable {
 		this.director = director;
 	}
 
-	public Movie() { // needed for POST to send back as a movie object
+	public Movie() {this.personlist=new HashSet<Person>();
 	}
 
 	public String getMovieName() {
