@@ -36,7 +36,8 @@ public class Movie implements Serializable {
 
 	private String movieName;
 	private String director;
-	 @ManyToMany(cascade=CascadeType.ALL)
+	 @ManyToMany(cascade = 
+	        {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<Person> personlist;
 
 	public Set<Person> getPersonlist() {
