@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web. bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class AppController {
@@ -26,12 +26,12 @@ public class AppController {
 	@Autowired
 	private personRepository personRepository;
 
-//	@RequestMapping(path = "/", method = RequestMethod.GET)
-//	public String home(Model model, HttpSession session) {
-//		model.addAttribute("movieName", session.getAttribute("movieName"));
-//		model.addAttribute("director", session.getAttribute("director"));
-//		return "movies";
-//	}
+	// @RequestMapping(path = "/", method = RequestMethod.GET)
+	// public String home(Model model, HttpSession session) {
+	// model.addAttribute("movieName", session.getAttribute("movieName"));
+	// model.addAttribute("director", session.getAttribute("director"));
+	// return "movies";
+	// }
 
 	@RequestMapping(path = "/api/movies/{id}", method = RequestMethod.GET)
 	public Movie getmovie(Model model, HttpSession session,
@@ -43,10 +43,11 @@ public class AppController {
 	public void postmovie(@RequestBody Movie m) {
 		movieRepository.save(m);
 	}
-//	{"movieName":"JAWS7",
-//		"director":"Speilberg222",
-//			"personlist":[{"firstname":"jonathan", "lastname":"shales"}, {"firstname":"john", "lastname":"shales"}]
-//		}
+	// {"movieName":"JAWS7",
+	// "director":"Speilberg222",
+	// "personlist":[{"firstname":"jonathan", "lastname":"shales"},
+	// {"firstname":"john", "lastname":"shales"}]
+	// }
 
 	@RequestMapping(path = "/api/movies", method = RequestMethod.PUT)
 	public void putmovie(Model model, HttpSession session, String movieName,
@@ -59,7 +60,7 @@ public class AppController {
 		if (director != null) {
 			n.setDirector(director);
 		}
-		if (person_id!=null){
+		if (person_id != null) {
 			Person p = personRepository.findOne(Integer.parseInt(person_id));
 			System.out.println(p.toString());
 			n.getPersonlist().add(p);
@@ -71,35 +72,27 @@ public class AppController {
 	public void deletemovie(Model model, HttpSession session, int id) {
 		movieRepository.delete(id);
 	}
-	
+
 	@RequestMapping(path = "/api/user", method = RequestMethod.GET)
 	public List<User> getusers(Model model, HttpSession session) {
 
 		return userRepository.findAll();
 	}
-	
-	@RequestMapping(path = "/api/user", method = RequestMethod.POST)
-	public List<User> user(Model model, HttpSession session, String userName,
-			String firstName, String lastName) {
-		User user = new User(userName, firstName, lastName);
-		// Rating rating = new Rating()   //just to create a user do I need to create a rating
-		userRepository.save(user);
-		session.setAttribute("userName", userName);
-		session.setAttribute("firstName", firstName);
-		session.setAttribute("lastName", lastName);
 
-		// return movieRepository.findAll();
-		return userRepository.findAll();
+	@RequestMapping(path = "/api/user", method = RequestMethod.POST)
+	public void addUser(@RequestBody User newUser) {
+		userRepository.save(newUser);
 	}
 
 	@RequestMapping(path = "/api/user", method = RequestMethod.PUT)
-	public User updateuser(Model model, HttpSession session, @RequestBody User user) {
+	public User updateuser(Model model, HttpSession session,
+			@RequestBody User user) {
 		User existing = userRepository.findOne(user.getUserId());
 		existing.merge(user);
 		userRepository.save(existing);
 		return existing;
-	}	
-	
+	}
+
 	@RequestMapping(path = "/api/user", method = RequestMethod.DELETE)
 	public List<User> user(Model model, HttpSession session, int id) {
 		userRepository.delete(id);
@@ -119,10 +112,10 @@ public class AppController {
 	}
 
 	@RequestMapping(path = "/api/person/", method = RequestMethod.POST)
-//	{"firstname":"Jeremy4",
-//		"lastname":"Speilberg22",
-//		"role_flag":"actor"
-//		}
+	// {"firstname":"Jeremy4",
+	// "lastname":"Speilberg22",
+	// "role_flag":"actor"
+	// }
 	public Person person(@RequestBody Person p) {
 		personRepository.save(p);
 		return p;
@@ -143,39 +136,39 @@ public class AppController {
 		return personRepository.findAll();
 	}
 
-// Adding CRUD operations for Ratings but commented out for now until we discuss
-//	@RequestMapping(path = "/api/rating/{id}", method = RequestMethod.GET)
-//	public Rating getRating(Model model, HttpSession session,
-//			@PathVariable(name = "id", required = true) int id) {
-//		return ratingRepository.findOne(id);
-//	}
-//
-//	@RequestMapping(path = "/api/rating", method = RequestMethod.POST)
-//
-//	public List<Rating> person(Model model, HttpSession session,
-//			Movie movie, User user, int rating) {
-//		Rating r = new Rating(movie, user, rating);
-//		ratingRepository.save(r);
-//
-//		return ratingRepository.findAll();
-//	}
-//
-//	@RequestMapping(path = "/api/rating", method = RequestMethod.PUT)
-//	public Person updateperson(Model model, HttpSession session,
-//			@RequestBody Rating rating) {
-//		Rating existing = ratingRepository.findOne(rating.getId());
-//		existing.merge(rating);
-//		ratingRepository.save(existing);
-//		return existing;
-//	}
-//
-//	@RequestMapping(path = "/api/rating", method = RequestMethod.DELETE)
-//	public List<rating> person(Model model, HttpSession session, int id) {
-//		ratingRepository.delete(id);
-//		return ratingRepository.findAll();
-//	}
-	
-	
+	// Adding CRUD operations for Ratings but commented out for now until we
+	// discuss
+	// @RequestMapping(path = "/api/rating/{id}", method = RequestMethod.GET)
+	// public Rating getRating(Model model, HttpSession session,
+	// @PathVariable(name = "id", required = true) int id) {
+	// return ratingRepository.findOne(id);
+	// }
+	//
+	// @RequestMapping(path = "/api/rating", method = RequestMethod.POST)
+	//
+	// public List<Rating> person(Model model, HttpSession session,
+	// Movie movie, User user, int rating) {
+	// Rating r = new Rating(movie, user, rating);
+	// ratingRepository.save(r);
+	//
+	// return ratingRepository.findAll();
+	// }
+	//
+	// @RequestMapping(path = "/api/rating", method = RequestMethod.PUT)
+	// public Person updateperson(Model model, HttpSession session,
+	// @RequestBody Rating rating) {
+	// Rating existing = ratingRepository.findOne(rating.getId());
+	// existing.merge(rating);
+	// ratingRepository.save(existing);
+	// return existing;
+	// }
+	//
+	// @RequestMapping(path = "/api/rating", method = RequestMethod.DELETE)
+	// public List<rating> person(Model model, HttpSession session, int id) {
+	// ratingRepository.delete(id);
+	// return ratingRepository.findAll();
+	// }
+
 	/*
 	 * @RequestMapping(path = "/addmovie", method = RequestMethod.POST)
 	 * 
