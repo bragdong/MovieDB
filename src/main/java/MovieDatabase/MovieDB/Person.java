@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,7 +26,8 @@ public class Person implements Serializable {
 	private String firstname;
 	private String lastname;
 	private String role_flag;
-	 @ManyToMany(mappedBy = "personlist")
+	 @ManyToMany(mappedBy = "personlist", cascade = 
+	        {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<Movie> movielist;
 
 	@Id
