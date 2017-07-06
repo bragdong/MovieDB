@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 @Entity
 @Table(name = "person")
 
@@ -23,11 +26,12 @@ public class Person implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+
+
 	private String firstname;
 	private String lastname;
 	private String role_flag;
-	 @ManyToMany(mappedBy = "personlist", cascade = 
-	        {CascadeType.PERSIST, CascadeType.MERGE})
+	 @ManyToMany(mappedBy = "personlist")
 	private Set<Movie> movielist;
 
 	@Id
@@ -83,6 +87,7 @@ public class Person implements Serializable {
 		this.id = id;
 	}
 	
+	@JsonIgnore
 	public Set<Movie> getMovielist() {
 		return movielist;
 	}
@@ -101,6 +106,7 @@ public class Person implements Serializable {
 		if (other.role_flag != null) {
 			this.role_flag = other.role_flag;
 		}
-
+		
+		
 	}
 }

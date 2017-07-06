@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +39,7 @@ public class AppController {
 	@RequestMapping(path = "/api/movies/{id}", method = RequestMethod.GET)
 	public Movie getmovie(Model model, HttpSession session,
 			@PathVariable(name = "id", required = true) int id) {
+		
 		return movieRepository.findById(id);
 	}
 
@@ -52,7 +56,7 @@ public class AppController {
 	public void putmovie(Model model, HttpSession session, String movieName,
 			String director, int movie_id, String person_id) {
 		Movie n = movieRepository.findById(movie_id);
-		System.out.println(n.toString());
+		//System.out.println(n.toString());
 		if (movieName != null) {
 			n.setMovieName(movieName);
 		}
