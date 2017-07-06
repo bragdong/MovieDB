@@ -22,8 +22,6 @@ public class Person implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-
-
 	private String firstname;
 	private String lastname;
 	private String role_flag;
@@ -101,7 +99,6 @@ public class Person implements Serializable {
 		if (other.role_flag != null) {
 			this.role_flag = other.role_flag;
 		}
-		
-		
+
 	}
 }
