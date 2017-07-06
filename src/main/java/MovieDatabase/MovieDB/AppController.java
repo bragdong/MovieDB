@@ -44,8 +44,9 @@ public class AppController {
 	}
 
 	@RequestMapping(path = "/api/movies", method = RequestMethod.POST)
-	public void postmovie(@RequestBody Movie m) {
+	public Movie postmovie(@RequestBody Movie m) {
 		movieRepository.save(m);
+		return m;
 	}
 	// {"movieName":"JAWS7",
 	// "director":"Speilberg222",
