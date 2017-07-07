@@ -38,18 +38,15 @@ public class MovieDbApplicationTests {
 	public void contextLoads() throws Exception {
 		Movie m = new Movie("TEST", "1982");
         String json = new Gson().toJson(m);
-        mockMvc.perform(post("/api/movies/").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isOk());
+        mockMvc.perform(post("/api/movies/")
+        .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(json))
+        .andExpect(status().isOk());
         
 	}
 	@Test
 	public void getTest() throws Exception{
-		//Movie n = movieRepository.findByMovieName("TEST");   
-		//String query = "/api/movies/";
-		//query+=n.getId();
-		//System.out.println(query);
 		mockMvc.perform(get("/api/movies/40"))
 		.andExpect(status().isOk())
-		//.andExpect(content().contentType("application/json"))
 		.andExpect(jsonPath("$.movieName").value("TEST"));
 		//;
 	}
