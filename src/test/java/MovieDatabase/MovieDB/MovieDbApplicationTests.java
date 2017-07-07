@@ -35,21 +35,42 @@ public class MovieDbApplicationTests {
         }
 	
 	@Test
-	public void contextLoads() throws Exception {
+	public void createMovieTest() throws Exception {
 		Movie m = new Movie("TEST", "1982");
         String json = new Gson().toJson(m);
+
         mockMvc.perform(post("/api/movies/")
         .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(json))
         .andExpect(status().isOk());
-        
-	}
-	@Test
-	public void getTest() throws Exception{
-		mockMvc.perform(get("/api/movies/40"))
-		.andExpect(status().isOk())
-		.andExpect(jsonPath("$.movieName").value("TEST"));
-		//;
+      
 	}
 	
+	@Test
 
+	public void getMovieByIDTest() throws Exception{
+		mockMvc.perform(get("/api/movies/1"))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.movieName").value("TEST"));
+	}
+
+    
+//	@Test
+//	public void createMovieTest() throws Exception {
+//		Movie m = new Movie("TEST", "1982");
+//        String json = new Gson().toJson(m);
+//        mockMvc.perform(post("/api/movies/").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isOk());    
+//	}
+    
+	@Test
+	public void getUserByIDTest() throws Exception{
+		mockMvc.perform(get("/api/user/1"))
+		.andExpect(status().isOk());
+	}
+	
+	@Test
+	public void deleteUserByID() throws Exception{
+		mockMvc.perform(delete("/api/user/2"))
+		.andExpect(status().isOk());
+	}
+	
 }

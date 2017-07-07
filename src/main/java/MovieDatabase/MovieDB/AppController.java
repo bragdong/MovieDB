@@ -37,7 +37,7 @@ public class AppController {
 	// @RequestMapping(path = "/", method = RequestMethod.GET)
 	// public String home(Model model, HttpSession session) {
 	// model.addAttribute("movieName", session.getAttribute("movieName"));
-	// model.addAttribute("director", session.getAttribute("director"));
+	// model.addAttribute("year", session.getAttribute("year"));
 	// return "movies";
 	// }
 
@@ -54,21 +54,21 @@ public class AppController {
 		return m;
 	}
 	// {"movieName":"JAWS7",
-	// "director":"Speilberg222",
+	// "year":"1982",
 	// "personlist":[{"firstname":"jonathan", "lastname":"shales"},
 	// {"firstname":"john", "lastname":"shales"}]
 	// }
 
 	@RequestMapping(path = "/api/movies", method = RequestMethod.PUT)
 	public void putmovie(Model model, HttpSession session, String movieName,
-			String director, int movie_id, String person_id) {
+			String year, int movie_id, String person_id) {
 		Movie n = movieRepository.findById(movie_id);
 		//System.out.println(n.toString());
 		if (movieName != null) {
 			n.setMovieName(movieName);
 		}
-		if (director != null) {
-			n.setDirector(director);
+		if (year != null) {
+			n.setYear(year);
 		}
 		if (person_id != null) {
 			Person p = personRepository.findOne(Integer.parseInt(person_id));
@@ -89,6 +89,12 @@ public class AppController {
 		return userRepository.findAll();
 	}
 
+	@RequestMapping(path = "/api/user/{id}", method = RequestMethod.GET)
+	public User getUser(Model model, HttpSession session,
+			@PathVariable(name = "id", required = true) int id) {
+		return userRepository.findOne(id);
+	}	
+	
 	@RequestMapping(path = "/api/user", method = RequestMethod.POST)
 	public void addUser(@RequestBody User newUser) {
 		userRepository.save(newUser);
@@ -103,12 +109,17 @@ public class AppController {
 		return existing;
 	}
 
-	@RequestMapping(path = "/api/user", method = RequestMethod.DELETE)
-	public List<User> user(Model model, HttpSession session, int id) {
-		userRepository.delete(id);
-		return userRepository.findAll();
-	}
+//	@RequestMapping(path = "/api/user", method = RequestMethod.DELETE)
+//	public void delUser(Model model, HttpSession session, int id) {
+//		userRepository.delete(id);
+//	}
 
+	@RequestMapping(path = "/api/user/{id}", method = RequestMethod.DELETE)
+	public void deleteUser(Model model, HttpSession session, 
+			@PathVariable(name = "id", required = true) Integer id) {
+		userRepository.delete(id);
+	}
+	
 	@RequestMapping(path = "/api/person/{id}", method = RequestMethod.GET)
 	public Person getPerson(Model model, HttpSession session,
 			@PathVariable(name = "id", required = true) int id) {
@@ -183,17 +194,17 @@ public class AppController {
 	 * @RequestMapping(path = "/addmovie", method = RequestMethod.POST)
 	 * 
 	 * @ResponseBody public Movie addmovie(Model model, HttpSession session,
-	 * String userName, String director) {
+	 * String userName, String year) {
 	 * 
-	 * Movie m = new Movie(userName, director); return m; }
+	 * Movie m = new Movie(userName, year); return m; }
 	 */
 	@RequestMapping(path = "/getmovie", method = RequestMethod.GET) // Get or
 																	// Post?
 	@ResponseBody
-	public void getmovie(Model model, HttpSession session, String director,
+	public void getmovie(Model model, HttpSession session, String year,
 			String actor, String title, String genre) {
-		if (director == null) {
-			director = "";
+		if (year == null) {
+			year = "";
 		}
 		if (actor == null) {
 			actor = "";
