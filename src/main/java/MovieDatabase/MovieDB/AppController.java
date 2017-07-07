@@ -84,6 +84,12 @@ public class AppController {
 		return userRepository.findAll();
 	}
 
+	@RequestMapping(path = "/api/user/{id}", method = RequestMethod.GET)
+	public User getUser(Model model, HttpSession session,
+			@PathVariable(name = "id", required = true) int id) {
+		return userRepository.findOne(id);
+	}	
+	
 	@RequestMapping(path = "/api/user", method = RequestMethod.POST)
 	public void addUser(@RequestBody User newUser) {
 		userRepository.save(newUser);
@@ -98,12 +104,17 @@ public class AppController {
 		return existing;
 	}
 
-	@RequestMapping(path = "/api/user", method = RequestMethod.DELETE)
-	public List<User> user(Model model, HttpSession session, int id) {
-		userRepository.delete(id);
-		return userRepository.findAll();
-	}
+//	@RequestMapping(path = "/api/user", method = RequestMethod.DELETE)
+//	public void delUser(Model model, HttpSession session, int id) {
+//		userRepository.delete(id);
+//	}
 
+	@RequestMapping(path = "/api/user/{id}", method = RequestMethod.DELETE)
+	public void deleteUser(Model model, HttpSession session, 
+			@PathVariable(name = "id", required = true) Integer id) {
+		userRepository.delete(id);
+	}
+	
 	@RequestMapping(path = "/api/person/{id}", method = RequestMethod.GET)
 	public Person getPerson(Model model, HttpSession session,
 			@PathVariable(name = "id", required = true) int id) {
