@@ -26,8 +26,8 @@ public class Movie implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Movie [id=" + id + ", movieName=" + movieName + ", director="
-				+ director + ", personlist=" + personlist + "]";
+		return "Movie [id=" + id + ", movieName=" + movieName + ", year="
+				+ year + ", personlist=" + personlist + "]";
 	}
 
 	@Id
@@ -35,7 +35,7 @@ public class Movie implements Serializable {
 	int id;
 
 	private String movieName;
-	private String director;
+	private String year;
 	 @ManyToMany(cascade = 
 	        {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<Person> personlist;
@@ -56,10 +56,10 @@ public class Movie implements Serializable {
 		this.id = id;
 	}
 
-	public Movie(String movieName, String director) {
+	public Movie(String movieName, String year) {
 		super();
 		this.movieName = movieName;
-		this.director = director;
+		this.year = year;
 	}
 
 	public Movie() {this.personlist=new HashSet<Person>();
@@ -73,16 +73,18 @@ public class Movie implements Serializable {
 		this.movieName = movieName;
 	}
 
-	public String getDirector() {
-		return director;
-	}
-
-	public void setDirector(String director) {
-		this.director = director;
-	}
-	
 	public void addPerson(Person p) {
 		if (!personlist.contains(p))
 		{this.personlist.add(p);}
 	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+	
+
 }

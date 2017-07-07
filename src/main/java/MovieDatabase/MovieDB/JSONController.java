@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class JSONController {
 	
 	@RequestMapping(path = "/movie.json", method = RequestMethod.POST)
-	public Movie jsonHome(String movieName, String director) {
+	public Movie jsonHome(String movieName, String year) {
 		
-		return new Movie(movieName, director);
+		return new Movie(movieName, year);
 	}
 
 }

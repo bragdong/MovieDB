@@ -47,7 +47,7 @@ public class MovieDbApplicationTests {
 		//String query = "/api/movies/";
 		//query+=n.getId();
 		//System.out.println(query);
-		mockMvc.perform(get("/api/movies/40"))
+		mockMvc.perform(get("/api/movies/6"))
 		.andExpect(status().isOk())
 		//.andExpect(content().contentType("application/json"))
 		.andExpect(jsonPath("$.movieName").value("TEST"));
