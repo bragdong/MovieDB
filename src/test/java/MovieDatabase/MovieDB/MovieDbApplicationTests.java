@@ -53,7 +53,7 @@ public class MovieDbApplicationTests {
 		.andExpect(jsonPath("$.movieName").value("TEST"));
 	}
 
-    
+     
 //	@Test
 //	public void createMovieTest() throws Exception {
 //		Movie m = new Movie("TEST", "1982");
