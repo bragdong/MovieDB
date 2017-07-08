@@ -38,12 +38,17 @@ public class MovieDbApplicationTests {
 	public void createMovieTest() throws Exception {
 		Movie m = new Movie("TEST", "1982");
         String json = new Gson().toJson(m);
-        mockMvc.perform(post("/api/movies/").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isOk());    
+
+        mockMvc.perform(post("/api/movies/")
+        .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(json))
+        .andExpect(status().isOk());
+      
 	}
 	
 	@Test
+
 	public void getMovieByIDTest() throws Exception{
-		mockMvc.perform(get("/api/movies/2"))
+		mockMvc.perform(get("/api/movies/1"))
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$.movieName").value("TEST"));
 	}
