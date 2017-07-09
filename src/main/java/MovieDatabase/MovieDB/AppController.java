@@ -34,7 +34,7 @@ public class AppController {
 	@RequestMapping(path = "/api/movies/{id}", method = RequestMethod.GET)
 	public Movie getmovie(Model model, HttpSession session,
 			@PathVariable(name = "id", required = true) int id) {
-		
+
 		return movieRepository.findById(id);
 	}
 
@@ -77,8 +77,8 @@ public class AppController {
 	public User getUser(Model model, HttpSession session,
 			@PathVariable(name = "id", required = true) int id) {
 		return userRepository.findOne(id);
-	}	
-	
+	}
+
 	@RequestMapping(path = "/api/user", method = RequestMethod.POST)
 	public void addUser(@RequestBody User newUser) {
 		userRepository.save(newUser);
@@ -94,11 +94,11 @@ public class AppController {
 	}
 
 	@RequestMapping(path = "/api/user/{id}", method = RequestMethod.DELETE)
-	public void deleteUser(Model model, HttpSession session, 
+	public void deleteUser(Model model, HttpSession session,
 			@PathVariable(name = "id", required = true) Integer id) {
 		userRepository.delete(id);
 	}
-	
+
 	@RequestMapping(path = "/api/person/{id}", method = RequestMethod.GET)
 	public Person getPerson(Model model, HttpSession session,
 			@PathVariable(name = "id", required = true) int id) {
@@ -129,36 +129,6 @@ public class AppController {
 	public List<Person> person(Model model, HttpSession session, int id) {
 		personRepository.delete(id);
 		return personRepository.findAll();
-	}
-
-	//**********************************************
-	//*** Jonathan do we need any of the below?? ***
-	//**********************************************
-	/*
-	 * @RequestMapping(path = "/addmovie", method = RequestMethod.POST)
-	 * 
-	 * @ResponseBody public Movie addmovie(Model model, HttpSession session,
-	 * String userName, String year) {
-	 * 
-	 * Movie m = new Movie(userName, year); return m; }
-	 */
-	@RequestMapping(path = "/getmovie", method = RequestMethod.GET) 
-																	
-	@ResponseBody
-	public void getmovie(Model model, HttpSession session, String year,
-			String actor, String title, String genre) {
-		if (year == null) {
-			year = "";
-		}
-		if (actor == null) {
-			actor = "";
-		}
-		if (title == null) {
-			title = "";
-		}
-		if (genre == null) {
-			genre = "";
-		}
 	}
 
 }

@@ -13,26 +13,23 @@ import javax.persistence.Table;
 
 public class Rating implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
-	private int id;  
-	
-	@ManyToOne  // There can be many ratings for a single movie
+	private int id;
+
+	@ManyToOne // There can be many ratings for a single movie
 	private Movie movie;
-	
-	@ManyToOne  // There can be many ratings for a single user
+
+	@ManyToOne // There can be many ratings for a single user
 	private User user;
-	
-	private	int rating;
-	
+
+	private int rating;
+
 	public Rating(Movie movie, User user, int rating) {
 		super();
-		this.movie =  movie;
+		this.movie = movie;
 		this.rating = rating;
 	}
 
@@ -64,9 +61,8 @@ public class Rating implements Serializable {
 		this.rating = rating;
 	}
 
-	public static long getSerialversionuid() {   // Is this needed ??
+	public static long getSerialversionuid() { // Is this needed ??
 		return serialVersionUID;
-	}	
+	}
 
-	// Do we need methods here to add a Movie and User to Rating object?
 }

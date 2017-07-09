@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
-Movie findById(int id);
-@Query("select m from Movie m where id = ?1")
-Movie findByMovieName(String movie_name);
+	Movie findById(int id);
+
+	@Query("select m from Movie m where id = ?1")
+	Movie findByMovieName(String movie_name);
 }

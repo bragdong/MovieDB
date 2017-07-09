@@ -19,15 +19,12 @@ import javax.persistence.Table;
 
 public class Movie implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	public String toString() {
-		return "Movie [id=" + id + ", movieName=" + movieName + ", year="
-				+ year + ", personlist=" + personlist + "]";
+		return "Movie [id=" + id + ", movieName=" + movieName + ", year=" + year
+				+ ", personlist=" + personlist + "]";
 	}
 
 	@Id
@@ -36,8 +33,7 @@ public class Movie implements Serializable {
 
 	private String movieName;
 	private String year;
-	 @ManyToMany(cascade = 
-	        {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<Person> personlist;
 
 	public Set<Person> getPersonlist() {
@@ -62,7 +58,8 @@ public class Movie implements Serializable {
 		this.year = year;
 	}
 
-	public Movie() {this.personlist=new HashSet<Person>();
+	public Movie() {
+		this.personlist = new HashSet<Person>();
 	}
 
 	public String getMovieName() {
@@ -74,8 +71,9 @@ public class Movie implements Serializable {
 	}
 
 	public void addPerson(Person p) {
-		if (!personlist.contains(p))
-		{this.personlist.add(p);}
+		if (!personlist.contains(p)) {
+			this.personlist.add(p);
+		}
 	}
 
 	public String getYear() {
@@ -85,6 +83,5 @@ public class Movie implements Serializable {
 	public void setYear(String year) {
 		this.year = year;
 	}
-	
 
 }

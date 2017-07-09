@@ -11,5 +11,3 @@ public class MovieDbApplication {
 		SpringApplication.run(MovieDbApplication.class, args);
 	}
 }
-
-

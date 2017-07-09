@@ -15,23 +15,17 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
 @Table(name = "person")
 
 public class Person implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-
 
 	private String firstname;
 	private String lastname;
 	private String role_flag;
-	 @ManyToMany(mappedBy = "personlist")
+	@ManyToMany(mappedBy = "personlist")
 	private Set<Movie> movielist;
 
 	@Id
@@ -45,7 +39,8 @@ public class Person implements Serializable {
 				+ ", id=" + id + "]";
 	}
 
-	public Person() {this.movielist = new HashSet<Movie>();
+	public Person() {
+		this.movielist = new HashSet<Movie>();
 	};
 
 	public Person(String firstname, String lastname, String role_flag) {
@@ -86,7 +81,7 @@ public class Person implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	@JsonIgnore
 	public Set<Movie> getMovielist() {
 		return movielist;
@@ -106,7 +101,6 @@ public class Person implements Serializable {
 		if (other.role_flag != null) {
 			this.role_flag = other.role_flag;
 		}
-		
-		
+
 	}
 }
