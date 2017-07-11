@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -39,6 +44,9 @@ public class AppController {
 		return movieRepository.findById(id);
 	}
 
+	@ApiResponses(value = {
+			@ApiResponse(code = 201, message = "Successfully added movie") })
+	@ApiOperation(value = "Movies Post", notes = "This allows a user to add a movie to the database.")
 	@RequestMapping(path = "/api/movies", method = RequestMethod.POST)
 	public Movie postmovie(@RequestBody Movie m) {
 		movieRepository.save(m);
