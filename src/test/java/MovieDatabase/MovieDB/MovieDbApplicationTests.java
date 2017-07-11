@@ -46,7 +46,7 @@ public class MovieDbApplicationTests {
 	
 	@Test
 	public void getMovieByIDTest() throws Exception{
-		mockMvc.perform(get("/api/movies/1"))
+		mockMvc.perform(get("/api/movies/3"))
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$.movieName").value("TEST"));
 	}
@@ -67,7 +67,7 @@ public class MovieDbApplicationTests {
 	
 	@Test
 	public void deleteUserByID() throws Exception{
-		mockMvc.perform(delete("/api/user/6"))
+		mockMvc.perform(delete("/api/user/4"))
 		.andExpect(status().isOk());
 	}
 	

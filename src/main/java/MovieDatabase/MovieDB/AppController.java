@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -77,6 +80,7 @@ public class AppController {
 	}
 
 	@RequestMapping(path = "/api/user", method = RequestMethod.GET)
+	@ApiOperation(value = "Get User", notes = "Returns a list of all users in the database.")
 	public List<User> getusers(Model model, HttpSession session) {
 
 		return userRepository.findAll();
