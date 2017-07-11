@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Projections;
@@ -111,7 +112,7 @@ public class AppController {
 	}
 
 	@RequestMapping(path = "/api/person/", method = RequestMethod.POST)
-	public Person person(@RequestBody Person p) {
+	public Person person(@RequestBody @Valid Person p) {
 		personRepository.save(p);
 		return p;
 	}

@@ -12,16 +12,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name = "person")
 
+@ApiModel("Person")
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	 @ApiModelProperty(value = "the first name of the person", required = true)
 	private String firstname;
 	private String lastname;
 	private String role_flag;
