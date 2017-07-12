@@ -93,8 +93,9 @@ public class AppController {
 	}
 
 	@RequestMapping(path = "/api/user", method = RequestMethod.POST)
-	public void addUser(@RequestBody User newUser) {
+	public User addUser(@RequestBody User newUser) {
 		userRepository.save(newUser);
+		return newUser;
 	}
 
 	@RequestMapping(path = "/api/user", method = RequestMethod.PUT)
