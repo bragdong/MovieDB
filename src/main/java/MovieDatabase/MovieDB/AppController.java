@@ -39,6 +39,9 @@ public class AppController {
 
 	@Autowired
 	private personRepository personRepository;
+	
+	@Autowired
+	private MovieDBValidator MovieDBValidator;
 
 	@RequestMapping(path = "/api/movies/{id}", method = RequestMethod.GET)
 	public Movie getmovie(Model model, HttpSession session,
