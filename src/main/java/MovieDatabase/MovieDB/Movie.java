@@ -13,6 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "movie")
@@ -31,7 +37,11 @@ public class Movie implements Serializable {
 	@GeneratedValue
 	int id;
 
+	@NotNull(groups = New.class)
+	@Size(min=1, max=35)
 	private String movieName;
+	@Size(min=4,max=4)
+	@NotNull(groups = New.class)
 	private String year;
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<Person> personlist;
@@ -84,4 +94,11 @@ public class Movie implements Serializable {
 		this.year = year;
 	}
 
+
+    public interface Existing {
+    }
+ 
+    public interface New {
+    }
+	
 }
