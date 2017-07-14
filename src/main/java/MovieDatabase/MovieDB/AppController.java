@@ -13,12 +13,14 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import MovieDatabase.MovieDB.Movie.Existing;
+import MovieDatabase.MovieDB.Movie.New;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -54,20 +56,19 @@ public class AppController {
 			@ApiResponse(code = 201, message = "Successfully added movie") })
 	@ApiOperation(value = "Movies Post", notes = "This allows a user to add a movie to the database.")
 	@RequestMapping(path = "/api/movies", method = RequestMethod.POST)
-	public Movie postmovie(@RequestBody Movie m) {
+	public Movie postmovie(@Validated({New.class}) @RequestBody Movie m) {
 		movieRepository.save(m);
 		return m;
 	}
 
 	@RequestMapping(path = "/api/movies", method = RequestMethod.PUT)
-	public void putmovie(Model model, HttpSession session, String movieName,
-			String year, int movie_id, String person_id) {
-		Movie n = movieRepository.findById(movie_id);
-		if (movieName != null) {
-			n.setMovieName(movieName);
+	public void putmovie(@Validated({Existing.class}) @RequestBody Movie m, String person_id) {
+		Movie n = movieRepository.findById(m.getId());
+		if (m.getMovieName() != null) {
+			n.setMovieName(m.getMovieName());
 		}
-		if (year != null) {
-			n.setYear(year);
+		if (m.getYear() != null) {
+			n.setYear(m.getYear());
 		}
 		if (person_id != null) {
 			Person p = personRepository.findOne(Integer.parseInt(person_id));
