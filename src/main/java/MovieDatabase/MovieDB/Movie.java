@@ -40,7 +40,6 @@ public class Movie implements Serializable {
 	@NotNull(groups = New.class)
 	@Size(min=1, max=35)
 	private String movieName;
-	@Size(min=4,max=4)
 	@NotNull(groups = New.class)
 	private String year;
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
